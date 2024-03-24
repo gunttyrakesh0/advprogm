@@ -1,0 +1,65 @@
+package com.sathya.tech;
+
+import java.io.IOException;
+import java.io.InputStream;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+
+import org.apache.commons.io.IOUtils;
+import java.sql.Date;
+@WebServlet("/UpdateServlet")
+@MultipartConfig
+public class UpdateServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+     
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String proId = request.getParameter("proId");
+        String updatedProName = request.getParameter("updatedProName");
+        double updatedProPrice = Double.parseDouble(request.getParameter("updatedProPrice"));
+        String updatedProBrand = request.getParameter("updatedProBrand");
+        String updatedProMadeIn = request.getParameter("updatedProMadein");
+        Date updatedProMfgDateStr = Date.valueOf(request.getParameter("updatedProMfgdate"));
+        Date updatedProExpDateStr = Date.valueOf(request.getParameter("updatedProExpdate"));
+        Part part=request.getPart("updatedproimage");
+	      InputStream inputstream=part.getInputStream();
+	      
+	      //conversion of inputstream to byte array
+	      
+	     byte[] updatedproimage= IOUtils.toByteArray(inputstream);
+
+ 
+		Productdao dao=new Productdao();
+		 Product product=new Product();
+	      product.setProId(proId);
+	      product.setProName(updatedProName);
+	      product.setProprice(updatedProPrice);
+	      product.setProBrand(updatedProBrand);
+	      product.setProMadeIn(updatedProMadeIn);
+	      product.setProMfgDate(updatedProMfgDateStr);
+	      product.setProExpDate(updatedProExpDateStr);
+	      product.setProImage(updatedproimage);
+		int result= dao.UpdateProductList(product);
+		 
+
+			if(result==1) {
+				request.setAttribute("UpdateResult", result);
+				RequestDispatcher dispatcher=request.getRequestDispatcher("productList.jsp");
+				dispatcher.forward(request, response);
+			}
+			else {
+				request.setAttribute("UpdateResult", result);
+				RequestDispatcher dispatcher=request.getRequestDispatcher("editform.jsp");
+				dispatcher.forward(request, response);
+			}
+	}
+ 
+
+}

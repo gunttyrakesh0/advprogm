@@ -1,0 +1,19 @@
+var number=100;
+var i;
+for(i=1; i<=number; i++ ){
+	if(i%3===0){
+		i=Fizz;
+		document.write(i);
+		}
+	else if(i%5===0){
+		i=Buzz;
+		document.write(i);
+		}
+	else if(i%3===0&&i%5===0){
+		i=Fizzbuzz;
+		document.write(i);
+	}
+		else
+		document.write(i);
+	
+}

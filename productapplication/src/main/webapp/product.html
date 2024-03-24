@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+ <html>
+	 <head>
+		 <title>Product Bill App</title>
+	 </head>
+	 <body bgcolor="purple">
+		 <form method="get" action="ProductServlet">
+			 <label>product Id</label>
+			 <input type="number" name="ProductId" placeholder="enter id" required/>
+			 
+			 <br><br>
+			 
+			 <label>product Name</label>
+			 <input type="text" name="Productname" placeholder="enter name" required/>
+			 
+			 <br><br>
+			 
+			 <label>product Price</label>
+			 <input type="number" name="Productprice" placeholder="enter price" required/>
+			 
+			 <br><br>
+			 
+			 <label>product Quntity</label>
+			 <input type="number" name="ProductQuntity" placeholder="enter quntity" min="2" max="15"/>
+			 
+			 <br><br>
+			 
+			 <input type="submit" value="ProductInvoice"/>
+		 </form>
+	 </body>
+ </html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>REGISTER FORM...</title>
+</head>
+<body bgcolor="pink">
+	<form method="get" action="RegisterServlet">
+		<label>User Name:</label>
+		<input type="text" name="Username" required/>
+		<br><br>
+		
+		<label>Password:</label>
+		<input type="password" name="Password" required/>
+		<br><br>
+		
+		<label>User Mobile:</label>
+		<input type="number" name="Usermobile" required/>
+		<br><br>
+		
+		<label>User Email:</label>
+		<input type="email" name="Useremail" required/>
+		<br><br>
+		
+		<label>Gender:</label>
+		<input type="radio" name="gender" value="MALE"/>MALE
+		<input type="radio" name="gender" value="FEMALE"/>FEMALE
+		<br><br>
+		
+		<label>DateofBirth:</label>
+		<input type="date" name="DOB" required/>
+		<br><br>
+		
+		<label>Qulification:</label>
+		<input type="checkbox" name="qulification" value="Bsc" />Bsc
+		<input type="checkbox" name="qulification" value="BTech"/>BTech
+		<input type="checkbox" name="qulification" value="MTech" />MTech
+		<input type="checkbox" name="qulification" value="Bcom" />Bcom
+		<br><br>
+		
+		<label>Country</label>
+		<select name="country"> 
+			 <option>India</option>
+			<option>USA</option>
+			<option>UK</option>
+			<option>GERMAN</option>
+		</select>
+		<br><br>
+		
+		
+		<label>Language</label>
+		<select name="language" size="3" multiple>
+			<option>Telugu</option>
+			<option>Hindi</option>
+			<option>English</option>
+			<option>Kanada</option>
+		</select>
+		<br><br>
+		 
+		 <label>comments</label>
+		 <textarea name="comments" rows="4" cols="25">
+			 
+		 </textarea>
+		
+		<input type="submit" value="Register"/>
+		
+	</form>
+
+</body>
+</html>

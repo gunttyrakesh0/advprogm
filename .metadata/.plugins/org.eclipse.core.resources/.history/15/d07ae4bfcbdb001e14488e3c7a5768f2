@@ -1,0 +1,108 @@
+package com.sathya.tech;
+
+import java.sql.Statement;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Productdao {
+
+	public int save(Product product) 
+	{
+		//declare the resources
+		Connection connection=null;
+		PreparedStatement PreparedStatement=null;
+		int saveresult=0;
+		try {
+			 //get the connection
+			connection=Productdatabase.createConnection();
+			//create preparedstatement object
+			PreparedStatement=connection.prepareStatement("insert into Productdata values(?,?,?,?,?,?,?,?)");
+			
+			 //read the data form product set the data
+			
+			PreparedStatement.setString(1,product.getProId());
+			PreparedStatement.setString(2, product.getProName());
+			PreparedStatement.setDouble(3, product.getProprice());
+			PreparedStatement.setString(4,product.getProBrand());
+			PreparedStatement.setString(5,product.getProMadeIn());
+			PreparedStatement.setDate(6,product.getProMfgDate());
+			PreparedStatement.setDate(7,product.getProExpDate());
+			PreparedStatement.setBytes(8,product.getProImage());
+			saveresult=PreparedStatement.executeUpdate();
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+			if(connection!=null)
+				connection.close();
+			if(PreparedStatement!=null)
+				PreparedStatement.close();
+			}
+			catch(SQLException e){
+				e.printStackTrace();
+			}
+		}
+		
+		return saveresult;
+	}
+	public List<Product> findAll(){
+	List<Product> productlist=new ArrayList<Product>();
+	try(Connection connection=Productdatabase.createConnection();
+		Statement statement=connection.createStatement()){
+		ResultSet resultset=statement.executeQuery("select * from productdata");
+		while(resultset.next()) {
+		Product product=new Product();
+		 product.setProId(resultset.getString("proId"));
+	      product.setProName( resultset.getString("proName"));
+	      product.setProprice( resultset.getDouble("proPrice"));
+	      product.setProBrand( resultset.getString("proBrand"));
+	      product.setProMadeIn(resultset.getString("proMadeIn"));
+	      product.setProMfgDate( resultset.getDate("proMfgDate"));
+	      product.setProExpDate( resultset.getDate("proExpDate"));
+	      product.setProImage(resultset.getBytes("proImage"));
+	      productlist.add(product);
+		
+		}
+		
+	}
+	catch(SQLException e) {
+		e.printStackTrace();
+	}
+	return productlist;
+	}
+	public int deletebyId(String proId) {
+		  int count=0;
+		try(Connection connection=Productdatabase.createConnection();
+				PreparedStatement PreparedStatement=connection.prepareStatement("delete from productdata where proId=?"))
+		{
+			PreparedStatement.setString(1,proId);
+			count=PreparedStatement.executeUpdate();
+		}
+		catch(SQLException e)
+		{
+			e.printStackTrace();
+		}
+		return count;
+	}
+	public int UpdateById(String proId) {
+		int update=0;
+	try(Connection connection=Productdatabase.createConnection();
+			PreparedStatement PreparedStatement=connection.prepareStatement("UPDATE productdata where proId>?"))
+	{
+		 
+		PreparedStatement.setString(1,proId);
+		update=PreparedStatement.executeUpdate();
+	}
+	catch(SQLException e) {
+		e.printStackTrace();
+	}
+	return update;
+	}
+	
+}

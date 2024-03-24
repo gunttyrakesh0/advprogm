@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;Javascript/src/main/webapp/Myscprit1.html&apos; to &apos; for.html&apos;" description="Rename resource &apos;Myscprit1.html&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/webapp/Myscprit1.html" name=" for.html" stamp="1709049027290" updateReferences="true"/>
+</session>
